@@ -20,7 +20,7 @@ export default new Vuex.Store({
       state.token = token;
     },
     removeToken(state) {
-      state.token = null
+      state.token = null;
     },
     resetState(state) {
       console.log("resetting the state");
@@ -96,6 +96,12 @@ export default new Vuex.Store({
         .then((response) => {
           console.log(response);
           context.commit("setTodos", response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+          context.commit("resetState");
+          context.dispatch("removeTokenFromLocalStorage");
+          router.push({ name: "Home" });
         });
     },
     async addTodo(context, todo) {
