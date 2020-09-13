@@ -68,13 +68,15 @@
 				this.editable = false;
 			},
 			async editTodo() {
-				console.log("editing todo");
-				this.isLoading = true;
-				await this.$store.dispatch("editTodo", {
-					todo: this.todo,
-					newDescription: this.newDescription
-				});
-				this.isLoading = false;
+				if (this.newDescription != this.todo.description) {
+					console.log("editing todo");
+					this.isLoading = true;
+					await this.$store.dispatch("editTodo", {
+						todo: this.todo,
+						newDescription: this.newDescription
+					});
+					this.isLoading = false;
+				}
 				this.$refs["description-input"].blur();
 			}
 		},
