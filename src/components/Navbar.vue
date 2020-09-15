@@ -11,7 +11,7 @@
 			</v-btn>
 			<v-btn :to="'todos'" text v-if="$store.state.token != null">
 				<span class="mr-2">Todos</span>
-				<v-icon>mdi-help</v-icon>
+				<v-icon>mdi-check-box-multiple-outline</v-icon>
 			</v-btn>
 			<v-btn :to="'/'" text v-if="$store.state.token == null">
 				<span class="mr-2">Login/Register</span>
