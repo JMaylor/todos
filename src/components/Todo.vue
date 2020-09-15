@@ -1,8 +1,8 @@
 <template>
 	<v-list-item>
 		<v-list-item-icon>
-			<v-icon color="teal" v-if="!todo.completed" @click="toggleCompleted">mdi-checkbox-blank-outline</v-icon>
-			<v-icon color="teal" v-if="todo.completed" @click="toggleCompleted">mdi-check-box-outline</v-icon>
+			<v-icon color="primary" v-if="!todo.completed" @click="toggleCompleted">mdi-checkbox-blank-outline</v-icon>
+			<v-icon color="primary" v-if="todo.completed" @click="toggleCompleted">mdi-check-box-outline</v-icon>
 		</v-list-item-icon>
 
 		<v-list-item-content>
@@ -19,7 +19,7 @@
 					:loading="isLoading"
 					dense
 					hide-details
-					background-color="teal lighten-5"
+					background-color="accent"
 					v-model="newDescription"
 					class="m-0 p-0"
 					type="text"
@@ -28,7 +28,7 @@
 		</v-list-item-content>
 
 		<v-list-item-icon>
-			<v-icon color="red" @click="deleteToDo">mdi-delete-outline</v-icon>
+			<v-icon color="error" @click="deleteToDo">mdi-delete-outline</v-icon>
 		</v-list-item-icon>
 	</v-list-item>
 </template>

@@ -25,7 +25,7 @@
 
 			<v-alert v-if="showError" type="error">Login failed</v-alert>
 
-			<v-btn :disabled="!valid" type="submit" color="primary">Login</v-btn>
+			<v-btn :disabled="!valid" type="submit" color="accent">Login</v-btn>
 		</v-form>
 	</v-skeleton-loader>
 </template>

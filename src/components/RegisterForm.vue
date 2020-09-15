@@ -46,7 +46,7 @@
 
 			<v-alert v-if="showError" type="error">Unable to create your account</v-alert>
 
-			<v-btn :disabled="!valid" type="submit" color="primary">Register</v-btn>
+			<v-btn :disabled="!valid" type="submit" color="accent">Register</v-btn>
 		</v-form>
 	</v-skeleton-loader>
 </template>

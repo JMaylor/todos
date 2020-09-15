@@ -4,7 +4,7 @@
 			<v-col cols="12" sm="8" md="4">
 				<!-- note -->
 				<v-card class="elevation-12">
-					<v-toolbar color="teal" dark>
+					<v-toolbar color="secondary" dark>
 						<v-toolbar-title>Your list</v-toolbar-title>
 
 						<v-spacer></v-spacer>
@@ -22,14 +22,14 @@
 								<v-switch
 									hide-details
 									class="pt-3 px-3"
-									color="red"
+									color="accent"
 									v-model="showCompleted"
 									label="Show Completed"
 								></v-switch>
 
 								<v-card-actions>
 									<v-spacer></v-spacer>
-									<v-btn color="teal" text @click="menu = false">OK</v-btn>
+									<v-btn color="secondary" text @click="menu = false">OK</v-btn>
 								</v-card-actions>
 							</v-card>
 						</v-menu>

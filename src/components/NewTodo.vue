@@ -8,9 +8,9 @@
 			:loading="isLoading"
 			:disabled="isLoading"
 			type="text"
-			prepend-icon="mdi-plus"
 			@click:prepend="addTodo"
-		></v-text-field>
+		>
+		<v-icon slot="prepend" color="primary">mdi-plus</v-icon></v-text-field>
 	</v-form>
 </template>
 

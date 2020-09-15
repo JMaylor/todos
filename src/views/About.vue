@@ -4,7 +4,7 @@
 			<v-col cols="12" sm="8" md="4">
 				<!-- note -->
 				<v-card class="elevation-12">
-					<v-toolbar color="teal" dark>
+					<v-toolbar color="secondary" dark>
 						<v-toolbar-title>About</v-toolbar-title>
 					</v-toolbar>
 					<v-card-title>A website by Joseph Maylor</v-card-title>

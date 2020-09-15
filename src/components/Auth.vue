@@ -4,7 +4,7 @@
 			<v-col cols="12" sm="8" md="4">
 				<!-- note -->
 				<v-card class="elevation-12">
-					<v-tabs v-model="tab" background-color="primary" class="elevation-2" dark>
+					<v-tabs v-model="tab" background-color="secondary" class="elevation-2" dark>
 						<v-tab href="#login-tab">Login</v-tab>
 						<v-tab-item value="login-tab">
 							<LoginForm />
