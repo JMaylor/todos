@@ -5,14 +5,12 @@
 				<!-- note -->
 				<v-card class="elevation-12">
 					<v-toolbar color="teal" dark>
-						<v-app-bar-nav-icon></v-app-bar-nav-icon>
 						<v-toolbar-title>Your list</v-toolbar-title>
+						
 						<v-spacer></v-spacer>
+						<v-text-field hide-details="" v-model="query" v-if="show"></v-text-field>
 						<v-btn icon>
-							<v-icon>mdi-magnify</v-icon>
-						</v-btn>
-						<v-btn icon>
-							<v-icon>mdi-dots-vertical</v-icon>
+							<v-icon @click="resetQuery">{{ show ? 'mdi-close' : 'mdi-magnify' }}</v-icon>
 						</v-btn>
 					</v-toolbar>
 					<NewTodo />
@@ -44,18 +42,24 @@
 		},
 		data() {
 			return {
-				newTodo: ""
+				query: "",
+				show: false,
 			};
 		},
 		computed: {
 			incompleteTodos() {
-				return this.$store.state.todos.filter(todo => !todo.completed);
+				return this.$store.state.todos.filter(todo => !todo.completed && todo.description.toLowerCase().includes(this.query.toLowerCase()));
 			},
 			completedTodos() {
-				return this.$store.state.todos.filter(todo => todo.completed);
+				return this.$store.state.todos.filter(todo => todo.completed && todo.description.toLowerCase().includes(this.query.toLowerCase()));
 			}
 		},
-		methods: {},
+		methods: {
+			resetQuery() {
+				this.query = '';
+				this.show = !this.show;
+			}
+		},
 		created() {
 			this.$store.dispatch("getTodos");
 		}
