@@ -23,7 +23,6 @@ export default new Vuex.Store({
       state.token = null;
     },
     resetState(state) {
-      console.log("resetting the state");
       state.token = null;
     },
     setTodos(state, todos) {
@@ -63,8 +62,6 @@ export default new Vuex.Store({
       localStorage.removeItem("token");
     },
     async logout(context) {
-      console.log("logging out");
-      console.log(context.state.token);
       await axios
         .post(
           `${context.state.baseURL}users/logout`,
@@ -76,13 +73,12 @@ export default new Vuex.Store({
           }
         )
         .then((response) => {
-          console.log(response);
           context.commit("resetState");
           context.dispatch("removeTokenFromLocalStorage");
           router.push({ name: "Home" });
+          return response;
         })
         .catch((err) => {
-          console.log("error", err);
           console.log(err.response);
         });
     },
@@ -94,7 +90,6 @@ export default new Vuex.Store({
           },
         })
         .then((response) => {
-          console.log(response);
           context.commit("setTodos", response.data);
         })
         .catch((error) => {
@@ -119,7 +114,6 @@ export default new Vuex.Store({
         )
         .then((response) => {
           context.commit("addTodo", response.data);
-          console.log(response);
           return response.data;
         })
         .catch((error) => {
@@ -134,14 +128,10 @@ export default new Vuex.Store({
             Authorization: "Bearer " + context.state.token,
           },
         })
-        .then((response) => {
-          console.log(response);
-          context.commit("removeTodo", id);
-        })
+        .then(context.commit("removeTodo", id))
         .catch((error) => console.log(error));
     },
     async toggleCompleted(context, todo) {
-      console.log("sending patch to toggle completed", todo);
       await axios
         .patch(
           `${context.state.baseURL}tasks/${todo._id}`,
@@ -154,14 +144,10 @@ export default new Vuex.Store({
             },
           }
         )
-        .then((response) => {
-          console.log("successful completed status patch", response.data);
-          context.commit("toggleCompleted", todo);
-        })
+        .then(context.commit("toggleCompleted", todo))
         .catch((error) => console.log(error));
     },
     async editTodo(context, todoDetails) {
-      console.log("sending patch to update task description");
       await axios
         .patch(
           `${context.state.baseURL}tasks/${todoDetails.todo._id}`,
@@ -174,10 +160,7 @@ export default new Vuex.Store({
             },
           }
         )
-        .then((response) => {
-          console.log("successful description patch", response.data);
-          context.commit("editTodo", todoDetails);
-        })
+        .then(context.commit("editTodo", todoDetails))
         .catch((error) => console.log(error));
     },
   },

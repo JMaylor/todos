@@ -45,7 +45,6 @@
 		},
 		methods: {
 			async login() {
-				console.log("loggin in");
 				// set state loading to true
 				this.$store.commit("toggleLoading");
 				await axios
@@ -54,7 +53,6 @@
 						password: this.password
 					})
 					.then(response => {
-						console.log(response);
 						const token = response.data.token;
 						this.$store.commit("storeToken", token);
 						this.$store.dispatch("storeTokenInLocalStorage");

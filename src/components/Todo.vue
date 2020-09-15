@@ -46,17 +46,14 @@
 		},
 		methods: {
 			deleteToDo() {
-				console.log("deleting todo");
 				this.$store.dispatch("removeTodo", this.todo._id);
 			},
 			async toggleCompleted() {
-				console.log("toggling completed", this.todo.completed);
 				this.isChangingCompletedStatus = true;
 				await this.$store.dispatch("toggleCompleted", this.todo);
 				this.isChangingCompletedStatus = false;
 			},
 			makeEditable() {
-				console.log("making editable");
 				this.newDescription = this.todo.description;
 				this.editable = true;
 				this.$nextTick(() => {
@@ -64,12 +61,10 @@
 				});
 			},
 			makeNotEditable() {
-				console.log("making not editable");
 				this.editable = false;
 			},
 			async editTodo() {
 				if (this.newDescription != this.todo.description) {
-					console.log("editing todo");
 					this.isLoading = true;
 					await this.$store.dispatch("editTodo", {
 						todo: this.todo,

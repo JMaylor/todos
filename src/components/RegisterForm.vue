@@ -80,7 +80,6 @@
 		}),
 		methods: {
 			async register() {
-				console.log("registering");
 				// set state loading to true
 				this.$store.commit("toggleLoading");
 				// send register request

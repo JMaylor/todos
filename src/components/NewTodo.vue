@@ -28,7 +28,6 @@
 					return null;
 				}
 				this.isLoading = true;
-				console.log("adding todo");
 				await this.$store.dispatch("addTodo", this.newTodo);
 				this.newTodo = "";
 				this.isLoading = false;
