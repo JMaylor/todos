@@ -6,12 +6,33 @@
 				<v-card class="elevation-12">
 					<v-toolbar color="teal" dark>
 						<v-toolbar-title>Your list</v-toolbar-title>
-						
+
 						<v-spacer></v-spacer>
-						<v-text-field hide-details="" v-model="query" v-if="show"></v-text-field>
+						<v-text-field hide-details v-model="query" v-if="show"></v-text-field>
 						<v-btn icon>
 							<v-icon @click="resetQuery">{{ show ? 'mdi-close' : 'mdi-magnify' }}</v-icon>
 						</v-btn>
+						<v-menu v-model="menu" :close-on-content-click="false" :nudge-width="200" offset-x>
+							<template v-slot:activator="{ on, attrs }">
+								<v-btn icon v-bind="attrs" v-on="on">
+									<v-icon>mdi-dots-vertical</v-icon>
+								</v-btn>
+							</template>
+							<v-card>
+								<v-switch
+									hide-details
+									class="pt-3 px-3"
+									color="red"
+									v-model="showCompleted"
+									label="Show Completed"
+								></v-switch>
+
+								<v-card-actions>
+									<v-spacer></v-spacer>
+									<v-btn color="teal" text @click="menu = false">OK</v-btn>
+								</v-card-actions>
+							</v-card>
+						</v-menu>
 					</v-toolbar>
 					<NewTodo />
 
@@ -44,19 +65,35 @@
 			return {
 				query: "",
 				show: false,
+				menu: false,
+				showCompleted: true
 			};
 		},
 		computed: {
 			incompleteTodos() {
-				return this.$store.state.todos.filter(todo => !todo.completed && todo.description.toLowerCase().includes(this.query.toLowerCase()));
+				return this.$store.state.todos.filter(
+					todo =>
+						!todo.completed &&
+						todo.description
+							.toLowerCase()
+							.includes(this.query.toLowerCase())
+				);
 			},
 			completedTodos() {
-				return this.$store.state.todos.filter(todo => todo.completed && todo.description.toLowerCase().includes(this.query.toLowerCase()));
+				return !this.showCompleted
+					? []
+					: this.$store.state.todos.filter(
+							todo =>
+								todo.completed &&
+								todo.description
+									.toLowerCase()
+									.includes(this.query.toLowerCase())
+					  );
 			}
 		},
 		methods: {
 			resetQuery() {
-				this.query = '';
+				this.query = "";
 				this.show = !this.show;
 			}
 		},
